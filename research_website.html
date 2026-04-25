@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Enhanced Learning Platform | 25-26J-485</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0d0f;
+      --bg2: #0f1418;
+      --bg3: #141c22;
+      --teal: #2ede98;
+      --teal2: #1ab87a;
+      --teal-dim: rgba(46, 222, 152, 0.12);
+      --teal-glow: rgba(46, 222, 152, 0.25);
+      --white: #f0f4f0;
+      --muted: #7a8c88;
+      --card: #111a1f;
+      --border: rgba(46, 222, 152, 0.18);
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 13, 15, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal);
+      background: var(--teal-dim);
+    }
+
+    .nav-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 1rem 6rem 3rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(46, 222, 152, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 80% at 80% 70%, rgba(26, 184, 122, 0.05) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.04;
+      background-image: linear-gradient(var(--teal) 1px, transparent 1px),
+        linear-gradient(90deg, var(--teal) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .wave-lines {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 0;
+      height: 280px;
+      opacity: 0.18;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 280'%3E%3Cpath fill='none' stroke='%232ede98' stroke-width='1.5' d='M0,180 C240,100 480,260 720,180 S1200,100 1440,180'/%3E%3Cpath fill='none' stroke='%232ede98' stroke-width='1' d='M0,210 C240,130 480,290 720,210 S1200,130 1440,210'/%3E%3Cpath fill='none' stroke='%232ede98' stroke-width='0.8' d='M0,240 C240,160 480,320 720,240 S1200,160 1440,240'/%3E%3C/svg%3E") center/cover no-repeat;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--teal);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      background: var(--teal-dim);
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--teal);
+      border-radius: 50%;
+    }
+
+    h1 {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    h1 span {
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      margin-top: 1.8rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: #3fffa8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--teal-glow);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--teal-dim);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      margin-top: 4rem;
+      display: flex;
+      gap: 3rem;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--teal);
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 6rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--teal);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .section-label::before {
+      content: '//';
+      opacity: 0.5;
+    }
+
+    h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    h2 em {
+      font-style: normal;
+      color: var(--teal);
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 600px;
+      margin-top: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.5rem 0 3rem;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: all 0.25s;
+    }
+
+    .card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── DOMAIN ── */
+    #domain {
+      background: var(--bg2);
+    }
+
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), transparent);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--teal);
+    }
+
+    .feature-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+
+    /* ── MILESTONES ── */
+    #milestones {
+      background: var(--bg2);
+    }
+
+    .milestone-select-wrap {
+      margin-top: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .milestone-select {
+      appearance: none;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      padding: 0.75rem 3rem 0.75rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      min-width: 280px;
+    }
+
+    .milestone-select:focus {
+      outline: none;
+      border-color: var(--teal);
+    }
+
+    .select-arrow {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--teal);
+      pointer-events: none;
+      font-size: 0.8rem;
+    }
+
+    .milestone-detail {
+      margin-top: 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      display: none;
+    }
+
+    .milestone-detail.active {
+      display: block;
+      animation: fadeUp 0.35s ease;
+    }
+
+    .milestone-detail h3 {
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .milestone-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .milestone-meta span {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .milestone-meta strong {
+      color: var(--white);
+    }
+
+    .progress-bar {
+      margin-top: 1.2rem;
+      background: var(--bg3);
+      border-radius: 20px;
+      height: 6px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal2), var(--teal));
+      border-radius: 20px;
+    }
+
+    /* ── DOCS ── */
+    .doc-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .doc-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .doc-item:hover {
+      border-color: var(--teal);
+      background: var(--bg3);
+    }
+
+    .doc-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .doc-icon {
+      font-size: 1.3rem;
+    }
+
+    .doc-name {
+      font-weight: 500;
+      font-size: 0.92rem;
+    }
+
+    .doc-type {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .doc-status {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    .status-done {
+      background: rgba(46, 222, 152, 0.12);
+      color: var(--teal);
+    }
+
+    .status-pending {
+      background: rgba(255, 180, 0, 0.1);
+      color: #ffb400;
+    }
+
+    /* ── PRESENTATIONS ── */
+    #presentations {
+      background: var(--bg2);
+    }
+
+    .slides-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+
+    .slide-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: all 0.25s;
+      text-decoration: none;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .slide-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+    }
+
+    .slide-thumb {
+      background: var(--bg3);
+      border-radius: 8px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .slide-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .slide-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── ABOUT ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .member-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.25s;
+    }
+
+    .member-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-3px);
+    }
+
+    .member-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 2px solid var(--border);
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      overflow: hidden;
+    }
+
+    .member-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .member-role {
+      font-size: 0.78rem;
+      color: var(--teal);
+      margin-top: 0.3rem;
+      font-family: var(--font-mono);
+    }
+
+    .member-email {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+    }
+
+    .supervisor-section {
+      margin-top: 3rem;
+    }
+
+    .supervisor-section h3 {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg2);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      margin-top: 2.5rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-item-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--teal-dim);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-form {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .footer-logo {
+      font-family: var(--font-head);
+      font-weight: 800;
+      color: var(--teal);
+    }
+
+    /* ── ARCH SECTION ── */
+    .arch-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .api-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .api-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      color: var(--teal);
+    }
+
+    .api-method {
+      color: var(--muted);
+      margin-right: 0.3rem;
+    }
+
+    .arch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .doc-drive-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .doc-item:hover .doc-drive-badge {
+      opacity: 1;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section,
+      #home {
+        padding: 5rem 1.5rem;
+      }
+
+      footer {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    a.member-email {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a.member-email:hover {
+      color: var(--teal);
+      text-decoration: underline;
+    }
+
+    /* Teal underline on active nav */
+    .nav-links a.active {
+      color: var(--teal);
+    }
+
+    .member-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.2rem;
+      display: block;
+      border: 2px solid var(--border);
+    }
+
+    .member-avatar-initials {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 2px solid var(--border);
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+
+    /* ── LIGHT THEME ── */
+    /*
+body.light {
+  --bg: #c8d4d4;
+  --bg2: #bfcccc;
+  --bg3: #b5c4c4;
+  --card: #cfdada;
+  --white: #0a1410;
+  --muted: #2e4a42;
+  --border: rgba(26, 184, 122, 0.3);
+  --teal-dim: rgba(26, 184, 122, 0.15);
+  --teal-glow: rgba(26, 184, 122, 0.25);
+}
+
+body.light nav {
+  background: rgba(200, 212, 212, 0.95);
+}
+
+body.light .card,
+body.light .feature-card,
+body.light .doc-item,
+body.light .slide-card,
+body.light .member-card,
+body.light .arch-box,
+body.light .milestone-detail {
+  background: #cfdada;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+body.light .btn-ghost {
+  background: rgba(26, 184, 122, 0.1);
+}*/
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#home" class="nav-logo"></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#domain">Domain</a></li>
+      <li><a href="#milestones">Milestones</a></li>
+      <li><a href="#documents">Documents</a></li>
+      <li><a href="#presentations">Slides</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <!-- <div style="display:flex;align-items:center;gap:1rem;">
+      <button id="theme-toggle" onclick="toggleTheme()"
+        style="background:var(--teal-dim);border:1px solid var(--border);color:var(--teal);width:38px;height:38px;border-radius:8px;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;"
+        title="Toggle theme">🌙</button> -->
+    <span class="nav-badge">25-26J-485</span>
+    <!-- </div> -->
+  </nav>
+
+  <!-- HERO / HOME -->
+  <section id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="wave-lines"></div>
+    <div class="hero-content">
+
+      <div class="hero-left">
+        <div class="hero-tag">Research Project · SLIIT · 2025–2026</div>
+        <h1>AI Enhanced<br><span>Learning Platform</span></h1>
+      </div>
+
+      <div class="hero-right">
+        <p class="hero-sub">An intelligent AI-powered platform to assist O/L Mathematics students in Sri Lanka with exam
+          preparation, personalized guidance, and stress monitoring.</p>
+        <div class="hero-actions">
+          <a href="#domain" class="btn btn-primary">Explore Research ↓</a>
+          <a href="#documents" class="btn btn-ghost">View Documents</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Components</span></div>
+          <div class="stat-item"><span class="stat-num">80%</span><span class="stat-label">Complete</span></div>
+          <div class="stat-item"><span class="stat-num">O/L</span><span class="stat-label">Target Level</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DOMAIN -->
+  <section id="domain">
+    <div class="section-label">Domain</div>
+    <h2>Research <em>Domain</em></h2>
+    <p class="section-intro">A deep dive into AI-assisted education for Sri Lankan O-Level Mathematics students.</p>
+    <hr class="divider">
+
+    <div class="domain-grid">
+      <div class="card">
+        <div class="card-icon">📚</div>
+        <h3>Literature Survey</h3>
+        <p>Existing AI-based educational platforms globally lack alignment with the Sri Lankan O/L Maths syllabus. No
+          Sinhala-medium AI system exists for this domain. Current tools lack model paper generation, step-by-step AI
+          guidance, and stress detection.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔍</div>
+        <h3>Research Gap</h3>
+        <p>No platform provides AI-generated model papers/quizzes, step-by-step problem explanations, integrated
+          progress tracking, and stress detection — all aligned to the Sri Lankan syllabus in a single system.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚠️</div>
+        <h3>Research Problem</h3>
+        <p>O/L Mathematics students struggle with past papers, lack personalized guidance, and experience high exam
+          stress. Teachers cannot individually monitor each student's progress effectively.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>Research Objectives</h3>
+        <p>Develop an AI-powered platform for O/L Maths supporting: practice paper generation, AI-guided problem
+          solving, real-time progress tracking, and emotion-based stress monitoring with explainable AI.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔬</div>
+        <h3>Methodology</h3>
+        <p>RAG (Retrieval Augmented Generation) for math problem solving, computer vision for stress/emotion detection
+          via webcam, ML-based progress analytics, and peer-to-peer forum integration.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Technologies Used</h3>
+        <p>Python · Flask · React · AI/ML Models · Computer Vision · RAG Architecture · REST APIs · Emotion Detection ·
+          Explainable AI (XAI)</p>
+      </div>
+    </div>
+
+    <br><br>
+    <div class="section-label">Key Features</div>
+    <h2>What the <em>Platform</em> Delivers</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-num">01 / COMPONENT</div>
+        <h3 style="font-family:var(--font-head);font-weight:700;margin-bottom:0.5rem;">Model Paper & Quiz Generation
+        </h3>
+        <p style="font-size:0.88rem;color:var(--muted);">AI-generated model papers with short-answer, structured, essay,
+          and full-paper modes. Aligned to the Sri Lankan O/L Mathematics syllabus.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">02 / COMPONENT</div>
+        <h3 style="font-family:var(--font-head);font-weight:700;margin-bottom:0.5rem;">Peer-to-Peer Forum</h3>
+        <p style="font-size:0.88rem;color:var(--muted);">An AI-powered mathematics discussion forum where students
+          can ask questions only related to maths, and the system provides answers in Sinhala.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03 / COMPONENT</div>
+        <h3 style="font-family:var(--font-head);font-weight:700;margin-bottom:0.5rem;">Stress Detection System</h3>
+        <p style="font-size:0.88rem;color:var(--muted);">Real-time webcam-based emotion detection during exam sessions.
+          Motivational responses triggered by detected stress states.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">04 / COMPONENT</div>
+        <h3 style="font-family:var(--font-head);font-weight:700;margin-bottom:0.5rem;">Progress Tracker & Achievements
+        </h3>
+        <p style="font-size:0.88rem;color:var(--muted);">Explainable AI-powered progress feedback. Tracks performance
+          across topics and provides actionable improvement insights.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">05 / IMPACT</div>
+        <h3 style="font-family:var(--font-head);font-weight:700;margin-bottom:0.5rem;">Commercialization Plan</h3>
+        <p style="font-size:0.88rem;color:var(--muted);">Pilot with select schools → full rollout → continuous feedback
+          loop. Low-cost online platform for schools and individual students across Sri Lanka.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MILESTONES -->
+  <section id="milestones">
+    <div class="section-label">Milestones</div>
+    <h2>Project <em>Assessments</em></h2>
+    <p class="section-intro">Select a milestone to view details, dates, and allocated marks.</p>
+    <hr class="divider">
+
+    <div class="milestone-select-wrap">
+      <select class="milestone-select" onchange="showMilestone(this.value)">
+        <option value="">— Select a Milestone —</option>
+        <option value="pp">Project Proposal</option>
+        <option value="pp1">Progress Presentation 1</option>
+        <option value="pp2">Progress Presentation 2</option>
+        <option value="final">Final Viva</option>
+      </select>
+      <span class="select-arrow">▾</span>
+    </div>
+
+    <div id="ms-pp" class="milestone-detail">
+      <h3> Project Proposal</h3>
+      <div class="milestone-meta">
+        <span>Marks: <strong>6%</strong></span>
+        <span>Status: <strong style="color:var(--teal)">Completed ✓</strong></span>
+      </div>
+      <p style="margin-top:1rem;color:var(--muted);font-size:0.9rem;">Initial proposal covering problem statement,
+        objectives, methodology, and feasibility. Presented to project supervisors and panel.</p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:100%"></div>
+      </div>
+    </div>
+
+    <div id="ms-pp1" class="milestone-detail">
+      <h3> Progress Presentation 1</h3>
+      <div class="milestone-meta">
+        <span>Marks: <strong>15%</strong></span>
+        <span>Date: <strong>07 january 2025</strong></span>
+        <span>Status: <strong style="color:var(--teal)">Completed ✓</strong></span>
+      </div>
+      <p style="margin-top:1rem;color:var(--muted);font-size:0.9rem;">First progress review covering system
+        architecture, initial implementation, and literature survey findings.</p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:100%"></div>
+      </div>
+    </div>
+
+    <div id="ms-pp2" class="milestone-detail">
+      <h3> Progress Presentation 2</h3>
+      <div class="milestone-meta">
+        <span>Marks: <strong>18%</strong></span>
+        <span>Date: <strong>10 March 2026</strong></span>
+        <span>Status: <strong style="color:var(--teal)">Completed ✓</strong></span>
+      </div>
+      <p style="margin-top:1rem;color:var(--muted);font-size:0.9rem;">Current stage — demonstrating 80% complete
+        platform with all four components integrated. System architecture and API endpoints presented.</p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:80%"></div>
+      </div>
+    </div>
+
+    <div id="ms-final" class="milestone-detail">
+      <h3> Final Viva</h3>
+      <div class="milestone-meta">
+        <span>Marks: <strong>10%</strong></span>
+        <span>Date: <strong>05 May 2026</strong></span>
+        <span>Status: <strong style="color:var(--teal)">Upcoming</strong></span>
+      </div>
+      <p style="margin-top:1rem;color:var(--muted);font-size:0.9rem;">Final system demonstration with complete
+        documentation, research paper, and fully deployed platform evaluation.</p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:15%"></div>
+      </div>
+    </div>
+
+    <div id="ms-viva" class="milestone-detail">
+      <h3> Viva</h3>
+      <div class="milestone-meta">
+        <span>Date: <strong>July 2026</strong></span>
+        <span>Status: <strong style="color:var(--muted)">Upcoming</strong></span>
+      </div>
+      <p style="margin-top:1rem;color:var(--muted);font-size:0.9rem;">Individual oral examination covering research
+        contributions, technical decisions, and individual component work.</p>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:5%"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENTS -->
+  <section id="documents">
+    <div class="section-label">Documents</div>
+    <h2>Project <em>Documents</em></h2>
+    <p class="section-intro">All produced and pending documents for the research project.</p>
+    <hr class="divider">
+
+    <!-- PDF Preview Modal -->
+    <div id="pdf-modal"
+      style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+      <div
+        style="background:var(--card);border:1px solid var(--border);border-radius:16px;width:90%;max-width:900px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;">
+        <div
+          style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:1px solid var(--border);">
+          <span id="modal-title" style="font-family:var(--font-head);font-weight:700;font-size:1rem;"></span>
+          <div style="display:flex;gap:0.8rem;align-items:center;">
+            <a id="modal-download" href="#" download
+              style="font-family:var(--font-mono);font-size:0.75rem;background:var(--teal);color:var(--bg);padding:0.4rem 1rem;border-radius:6px;text-decoration:none;">⬇
+              Download</a>
+            <button onclick="closePdfModal()"
+              style="background:transparent;border:1px solid var(--border);color:var(--muted);padding:0.4rem 0.8rem;border-radius:6px;cursor:pointer;font-size:0.85rem;">✕
+              Close</button>
+          </div>
+        </div>
+        <iframe id="modal-iframe" src="" style="flex:1;border:none;min-height:70vh;background:#fff;"></iframe>
+      </div>
+    </div>
+
+    <!-- Checklist Links Modal -->
+    <div id="links-modal"
+      style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;">
+      <div
+        style="background:var(--card);border:1px solid var(--border);border-radius:16px;width:90%;max-width:600px;overflow:hidden;">
+        <div
+          style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:1px solid var(--border);">
+          <span style="font-family:var(--font-head);font-weight:700;font-size:1rem;"> Check List Documents</span>
+          <button onclick="closeLinksModal()"
+            style="background:transparent;border:1px solid var(--border);color:var(--muted);padding:0.4rem 0.8rem;border-radius:6px;cursor:pointer;">✕
+            Close</button>
+        </div>
+        <div id="links-content" style="padding:1.5rem;display:flex;flex-direction:column;gap:0.8rem;">
+          <!-- Links will be injected here -->
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-list">
+      <a href="https://drive.google.com/file/d/1MTV4TvSEFgro3TjyY1xwheoeaNC9brox/view?usp=sharing" target="_blank"
+        class="doc-item">
+        <div class="doc-left">
+          <span class="doc-icon">📄</span>
+          <div>
+            <div class="doc-name">Project Charter</div>
+            <div class="doc-type">PDF · Project Scope Document</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.8rem;">
+          <span class="doc-drive-badge">🔗 Open in Drive ↗</span>
+          <span class="doc-status status-done">Available</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/file/d/19BAHxQ7N1VwIXOSP8djkjbOVzejfGjPx/view?usp=sharing" target="_blank"
+        class="doc-item">
+        <div class="doc-left">
+          <span class="doc-icon">📘</span>
+          <div>
+            <div class="doc-name">Proposal Document</div>
+            <div class="doc-type">PDF · Full Research Proposal</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.8rem;">
+          <span class="doc-drive-badge">🔗 Open in Drive ↗</span>
+          <span class="doc-status status-done">Available</span>
+        </div>
+      </a>
+
+      <a href="javascript:void(0)" class="doc-item" onclick="openLinks()">
+        <div class="doc-left">
+          <span class="doc-icon">✅</span>
+          <div>
+            <div class="doc-name">Check List Documents</div>
+            <div class="doc-type">PDF · Assessment Checklists</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.8rem;">
+          <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--muted);">click to view links</span>
+          <span class="doc-status status-done">Available</span>
+        </div>
+      </a>
+
+      <!-- PENDING DOCS — unchanged -->
+      <a href="javascript:void(0)" class="doc-item">
+        <div class="doc-left">
+          <span class="doc-icon">📗</span>
+          <div>
+            <div class="doc-name">Final Document — Member 1</div>
+            <div class="doc-type">PDF · Individual Contribution Report</div>
+          </div>
+        </div>
+        <span class="doc-status status-pending">Pending</span>
+      </a>
+      <a href="javascript:void(0)" class="doc-item">
+        <div class="doc-left">
+          <span class="doc-icon">📗</span>
+          <div>
+            <div class="doc-name">Final Document — Member 2</div>
+            <div class="doc-type">PDF · Individual Contribution Report</div>
+          </div>
+        </div>
+        <span class="doc-status status-pending">Pending</span>
+      </a>
+      <a href="javascript:void(0)" class="doc-item">
+        <div class="doc-left">
+          <span class="doc-icon">📗</span>
+          <div>
+            <div class="doc-name">Final Document — Member 3</div>
+            <div class="doc-type">PDF · Individual Contribution Report</div>
+          </div>
+        </div>
+        <span class="doc-status status-pending">Pending</span>
+      </a>
+      <a href="javascript:void(0)" class="doc-item">
+        <div class="doc-left">
+          <span class="doc-icon">📗</span>
+          <div>
+            <div class="doc-name">Final Document — Member 4</div>
+            <div class="doc-type">PDF · Individual Contribution Report</div>
+          </div>
+        </div>
+        <span class="doc-status status-pending">Pending</span>
+      </a>
+      <a href="javascript:void(0)" class="doc-item">
+        <div class="doc-left">
+          <span class="doc-icon">📙</span>
+          <div>
+            <div class="doc-name">Main Final Document</div>
+            <div class="doc-type">PDF · Combined Group Research Document</div>
+          </div>
+        </div>
+        <span class="doc-status status-pending">Pending</span>
+      </a>
+    </div>
+    </div>
+  </section>
+
+  <!-- PRESENTATIONS -->
+  <section id="presentations">
+    <div class="section-label">Presentations</div>
+    <h2>Presentation <em>Slides</em></h2>
+    <p class="section-intro">Slides used in each milestone presentation stage.</p>
+    <hr class="divider">
+
+    <div class="slides-grid">
+      <a href="https://drive.google.com/file/d/1HE9ioTgRuwWomnACgVyOsAZ0cdEbf5tw/view?usp=sharing" target="_blank"
+        class="slide-card">
+        <div class="slide-thumb" style="padding:0;overflow:hidden;">
+          <img src="https://drive.google.com/thumbnail?id=1HE9ioTgRuwWomnACgVyOsAZ0cdEbf5tw&sz=w400"
+            alt="Proposal Presentation" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div class="slide-title">Proposal Presentation</div>
+        <div class="slide-sub">Oct 2025 · Initial pitch and research plan</div>
+        <span class="doc-status status-done" style="width:fit-content">Available ↗</span>
+      </a>
+
+      <a href="https://drive.google.com/file/d/1nZ_D4GbNV02rB7rELrWR3zwr1P9jwRgc/view?usp=sharing" target="_blank"
+        class="slide-card">
+        <div class="slide-thumb" style="padding:0;overflow:hidden;">
+          <img src="https://drive.google.com/thumbnail?id=1nZ_D4GbNV02rB7rELrWR3zwr1P9jwRgc&sz=w400"
+            alt="Progress Presentation 1" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div class="slide-title">Progress Presentation 1</div>
+        <div class="slide-sub">Nov 2025 · Architecture & early development</div>
+        <span class="doc-status status-done" style="width:fit-content">Available ↗</span>
+      </a>
+
+      <a href="https://drive.google.com/file/d/1WgRFONOBxg5g3_QoGB2YVrCVPiu04W-0/view?usp=sharing" target="_blank"
+        class="slide-card">
+        <div class="slide-thumb" style="padding:0;overflow:hidden;">
+          <img src="https://lh3.googleusercontent.com/d/1OISiUetSs6M0QT39US2dzq2te4Zf_7D6=w400"
+            alt="Progress Presentation 2" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"
+            onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:0.4rem;\'><div style=\'font-size:2rem;\'>📊</div><div style=\'font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);\'>Progress Presentation 2</div></div>'">
+        </div>
+        <div class="slide-title">Progress Presentation 2</div>
+        <div class="slide-sub">Feb 2026 · 80% complete platform demo</div>
+        <span class="doc-status status-done" style="width:fit-content">Available ↗</span>
+      </a>
+
+      <a href="javascript:void(0)" class="slide-card">
+        <div class="slide-thumb" style="padding:0;overflow:hidden;">
+          <svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg"
+            style="width:100%;height:100%;border-radius:8px;">
+            <rect width="400" height="120" fill="#1a2a4a" />
+            <rect width="400" height="32" fill="#1e3a6e" />
+            <text x="200" y="22" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white"
+              text-anchor="middle">AI Enhanced Learning Platform</text>
+            <text x="200" y="58" font-family="Arial,sans-serif" font-size="10" fill="#a0c4ff" text-anchor="middle">for
+              Sri Lankan O-Level Mathematics</text>
+            <text x="200" y="74" font-family="Arial,sans-serif" font-size="10" fill="#a0c4ff"
+              text-anchor="middle">Students</text>
+            <text x="200" y="100" font-family="Arial,sans-serif" font-size="9" fill="#2ede98" text-anchor="middle">Final
+              Presentation · 2026</text>
+            <rect x="160" y="88" width="80" height="1" fill="#2ede98" opacity="0.4" />
+          </svg>
+        </div>
+        <div class="slide-title">Final Presentation</div>
+        <div class="slide-sub">Jun 2026 · Full system evaluation</div>
+        <span class="doc-status status-pending" style="width:fit-content">Upcoming</span>
+      </a>
+    </div>
+    <!-- System Architecture -->
+    <br><br>
+    <div class="section-label">Architecture</div>
+    <h2>System <em>Architecture</em></h2>
+
+    <!-- Architecture diagram image -->
+    <div style="margin-top:2rem;border-radius:14px;overflow:hidden;border:1px solid var(--border);">
+      <a href="https://drive.google.com/file/d/1djJRDB0G-bEEoOc2drZ3DsYzRrrM9IdF/view?usp=sharing" target="_blank">
+        <img src="https://drive.google.com/thumbnail?id=1djJRDB0G-bEEoOc2drZ3DsYzRrrM9IdF&sz=w1600"
+          alt="System Architecture Diagram" style="width:70%;display:block;border-radius:14px;margin:0 auto;">
+      </a>
+    </div>
+    <div class="arch-grid">
+      <!-- <div class="arch-box">
+        <h3 style="font-family:var(--font-head);font-weight:700;color:var(--teal);margin-bottom:0.8rem;">Model Paper
+          APIs</h3>
+        <div class="api-tags">
+          <span class="api-tag"><span class="api-method">GET</span>/model-paper/topics</span>
+          <span class="api-tag"><span class="api-method">POST</span>/model-paper/initialize</span>
+          <span class="api-tag"><span class="api-method">POST</span>/generate/short-answer</span>
+          <span class="api-tag"><span class="api-method">POST</span>/generate/structured</span>
+          <span class="api-tag"><span class="api-method">POST</span>/generate/essay</span>
+          <span class="api-tag"><span class="api-method">POST</span>/generate/full-paper</span>
+          <span class="api-tag"><span class="api-method">POST</span>/model-paper/start</span>
+          <span class="api-tag"><span class="api-method">POST</span>/save-progress</span>
+          <span class="api-tag"><span class="api-method">POST</span>/submit</span>
+        </div>
+      </div> -->
+      <!-- <div class="arch-box">
+        <h3 style="font-family:var(--font-head);font-weight:700;color:var(--teal);margin-bottom:0.8rem;">MathRAG
+          Component </h3>
+        <div class="api-tags">
+          <span class="api-tag"><span class="api-method">POST</span>/api/answer</span>
+          <span class="api-tag"><span class="api-method">POST</span>/api/guidelines</span>
+          <span class="api-tag"><span class="api-method">POST</span>/api/search</span>
+          <span class="api-tag"><span class="api-method">GET</span>/api/history</span>
+          <span class="api-tag"><span class="api-method">POST</span>/api/chat/delete</span>
+          <span class="api-tag"><span class="api-method">POST</span>/api/chat/rename</span>
+        </div>
+      </div>
+      <div class="arch-box">
+        <h3 style="font-family:var(--font-head);font-weight:700;color:var(--teal);margin-bottom:0.8rem;">Stress
+          Detection </h3>
+        <div class="api-tags">
+          <span class="api-tag"><span class="api-method">GET</span>/api/stress/start</span>
+          <span class="api-tag"><span class="api-method">GET</span>/api/stress/stop</span>
+          <span class="api-tag"><span class="api-method">GET</span>/api/stress/video_frame</span>
+          <span class="api-tag"><span class="api-method">GET</span>/api/stress/get_emotion</span>
+        </div>
+      </div>
+
+       <div class="arch-box">
+        <h3 style="font-family:var(--font-head);font-weight:700;color:var(--teal);margin-bottom:0.8rem;">Progress Tracker </h3>
+        <div class="api-tags">
+          <span class="api-tag"><span class="api-method">GET</span>/api/</span>
+          <span class="api-tag"><span class="api-method">GET</span>/api/</span>
+          <span class="api-tag"><span class="api-method">GET</span>/api/</span>
+          <span class="api-tag"><span class="api-method">GET</span>/api/</span>
+        </div>
+      </div>
+    </div> -->
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">Team</div>
+    <h2>About <em>Us</em></h2>
+    <p class="section-intro">The research team behind the AI Enhanced Learning Platform.</p>
+    <hr class="divider">
+
+    <div class="team-grid">
+      <div class="member-card">
+        <img class="member-photo" src="https://drive.google.com/thumbnail?id=1BQIBSfJ-RBPbiuu_tyPthB8cs_RA9wYP&sz=w200"
+          alt="BIMSARA B S" />
+        <div class="member-name">BIMSARA B S</div>
+        <div class="member-role">Component 01 · Model Paper and quiz generator</div>
+        <a class="member-email" href="mailto:it22322708@my.sliit.lk">it22322708@my.sliit.lk</a>
+      </div>
+
+      <div class="member-card">
+        <img class="member-photo" src="https://drive.google.com/thumbnail?id=1ZvRuX0KYQ5NfyJKdYVIDVez3yVmaE87_&sz=w200"
+          alt="MORAYES C M S R D" />
+        <div class="member-name">MORAYES C M S R D</div>
+        <div class="member-role">Component 02 · Stress Detection</div>
+        <a class="member-email" href="mailto:it22328670@my.sliit.lk">it22328670@my.sliit.lk</a>
+      </div>
+
+      <div class="member-card">
+        <img class="member-photo" src="https://drive.google.com/thumbnail?id=15rpn8up9FhyMvIXaqz06Vvd-vrATj0bx&sz=w200"
+          alt="K.M.H.G.S.A.Konara" />
+        <div class="member-name">K.M.H.G.S.A.Konara</div>
+        <div class="member-role">Component 03 · P2P Math Forum</div>
+        <a class="member-email" href="mailto:it22341822@my.sliit.lk">it22341822@my.sliit.lk</a>
+      </div>
+
+      <div class="member-card">
+        <img class="member-photo" src="https://drive.google.com/thumbnail?id=1zkzr9goSEZpCOsd3GoNtOtj-DmbiFbgQ&sz=w200"
+          alt="GAYASHAN W G D D" />
+        <div class="member-name">GAYASHAN W G D D</div>
+        <div class="member-role">Component 04 · Progress Tracker</div>
+        <a class="member-email" href="mailto:it22923288@my.sliit.lk">it22923288@my.sliit.lk</a>
+      </div>
+    </div>
+    </div>
+
+    <!-- Achievements / Recognition -->
+    <div style="margin-top: 3rem;">
+      <h3 style="font-family:var(--font-head);font-size:1.2rem;font-weight:700;color:var(--teal);margin-bottom:1.2rem;">
+        Recognition & Achievements
+      </h3>
+      <div class="card" style="display:flex;align-items:flex-start;gap:1.5rem;">
+        <div style="font-size:2.5rem;flex-shrink:0;">🏅</div>
+        <div>
+          <div style="font-family:var(--font-head);font-weight:700;font-size:1rem;margin-bottom:0.4rem;">
+            Government School Teacher Recommendation
+          </div>
+          <div style="font-size:0.88rem;color:var(--muted);line-height:1.7;">
+            This project has received a formal recommendation from government school teachers
+            in Sri Lanka, recognizing its potential impact on O/L Mathematics education.
+          </div>
+          <div style="margin-top:0.8rem;">
+            <span
+              style="font-family:var(--font-mono);font-size:0.72rem;background:rgba(46,222,152,0.12);color:var(--teal);padding:0.2rem 0.8rem;border-radius:20px;">
+              ✓ Endorsed by Educators
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="supervisor-section">
+        <h3>Supervisors</h3>
+        <div class="team-grid">
+          <div class="member-card">
+            <img class="member-photo" 
+                src="https://drive.google.com/thumbnail?id=1wGDoZq2iDl8oZS_ZyOldSNTtrG1Flf5l&sz=w200"
+                alt="Ms. Narmada Gamage" />
+            <div class="member-name">Ms. Narmada Gamage</div>
+            <div class="member-role">Project Supervisor</div>
+            <a class="member-email" href="mailto:narmada.g@sliit.lk">narmada.g@sliit.lk</a>
+          </div>
+          <div class="member-card">
+            <img class="member-photo" 
+                src="https://drive.google.com/thumbnail?id=1hyVBiTod80u5AIUI8YfJAtG5b_wkfxiT&sz=w200"
+                alt="Ms. Kaushalya Rajapakshe" />
+            <div class="member-name">Ms. Kaushalya Rajapakshe</div>
+            <div class="member-role">Co-Supervisor</div>
+            <a class="member-email" href="mailto:kaushalya.r@sliit.lk">kaushalya.r@sliit.lk</a> 
+          </div>
+          <div class="member-card">
+            <img class="member-photo" 
+                src="https://drive.google.com/thumbnail?id=1ZBePxRFVyzE0D0ZRyPv5sVdAPHHNM5ho&sz=w200"
+                alt="Ms. Santhushi Hemachandra" />
+            <div class="member-name">Ms. Santhushi Hemachandra</div>
+            <div class="member-role">Project Supervisor</div>
+            <a class="member-email" href="mailto:santhushi.h@sliit.lk">santhushi.h@sliit.lk</a>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <h2>Get in <em>Touch</em></h2>
+    <p class="section-intro">Reach out for enquiries, collaborations, or feedback on the project.</p>
+    <hr class="divider">
+
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">🏛️</div>
+          <div>
+            <div style="font-weight:500;margin-bottom:0.2rem;">Institution</div>
+            <div style="color:var(--muted);font-size:0.88rem;">Sri Lanka Institute of Information Technology (SLIIT),
+              Malabe, Sri Lanka</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🔖</div>
+          <div>
+            <div style="font-weight:500;margin-bottom:0.2rem;">Project ID</div>
+            <div style="color:var(--muted);font-size:0.88rem;font-family:var(--font-mono);">25-26J-485</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div>
+            <div style="font-weight:500;margin-bottom:0.2rem;">Email</div>
+            <a href="mailto:research25.26j.485@gmail.com"
+              style="color:var(--muted);font-size:0.88rem;text-decoration:none;transition:color 0.2s;"
+              onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--muted)'">
+              research25.26j.485@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="contact-form">
+      <h3 style="font-family:var(--font-head);font-weight:700;margin-bottom:1.5rem;">Send a Message</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>YOUR NAME</label>
+          <input type="text" placeholder="e.g. Dr. Perera">
+        </div>
+        <div class="form-group">
+          <label>EMAIL</label>
+          <input type="email" placeholder="name@example.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>SUBJECT</label>
+        <input type="text" placeholder="Research enquiry / Collaboration / Feedback">
+      </div>
+      <div class="form-group">
+        <label>MESSAGE</label>
+        <textarea placeholder="Your message..."></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="alert('Message sent! (connect to a form backend to enable this)')">Send Message →</button>
+    </div> -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div style="margin-top:0.3rem;">AI Enhanced Learning Platform · 25-26J-485 · SLIIT 2025–2026</div>
+    </div>
+    <div style="text-align:right;">
+      <div>Built with HTML · CSS · JavaScript</div>
+      <div style="margin-top:0.2rem;">© 2026 Group 25-26J-485. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Milestone dropdown
+    function showMilestone(val) {
+      document.querySelectorAll('.milestone-detail').forEach(el => el.classList.remove('active'));
+      if (val) {
+        const el = document.getElementById('ms-' + val);
+        if (el) el.classList.add('active');
+      }
+    }
+
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Fade-in on scroll
+    const cards = document.querySelectorAll('.card, .feature-card, .doc-item, .slide-card, .member-card, .arch-box');
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, 80);
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(c => {
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(16px)';
+      c.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, box-shadow 0.25s';
+      cardObserver.observe(c);
+    });
+
+    // ── PDF Modal ──
+    function openPdf(url, title) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-iframe').src = url;
+      document.getElementById('modal-download').href = url;
+      const modal = document.getElementById('pdf-modal');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closePdfModal() {
+      document.getElementById('pdf-modal').style.display = 'none';
+      document.getElementById('modal-iframe').src = '';
+      document.body.style.overflow = '';
+    }
+
+    // ── Checklist Links Modal ──
+    const checklistLinks = [
+      { label: 'Frontend Repository', url: 'https://github.com/shashitha2002/AI_Sinhala_math_frontend' },
+      { label: 'Backend Repository', url: 'https://github.com/shashitha2002/AI_Sinhala_math_generator' },
+    ];
+    function openLinks() {
+      const container = document.getElementById('links-content');
+      container.innerHTML = checklistLinks.map(l => `
+    <a href="${l.url}" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1.2rem;text-decoration:none;color:var(--white);transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+      <span style="font-size:0.9rem;font-weight:500;">${l.label}</span>
+      <span style="font-family:var(--font-mono);font-size:0.72rem;color:var(--teal);">Open ↗</span>
+    </a>
+  `).join('');
+      document.getElementById('links-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLinksModal() {
+      document.getElementById('links-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    // Close modals on backdrop click
+    document.getElementById('pdf-modal').addEventListener('click', function (e) {
+      if (e.target === this) closePdfModal();
+    });
+    document.getElementById('links-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeLinksModal();
+    });
+
+    // ── Theme Toggle ──
+    function toggleTheme() {
+      const isLight = document.body.classList.toggle('light');
+      document.getElementById('theme-toggle').textContent = isLight ? '☀️' : '🌙';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
+
+    // Load saved theme on page load
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light');
+      document.getElementById('theme-toggle').textContent = '☀️';
+    }
+  </script>
+
+</body>
+
+</html>
